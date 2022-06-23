@@ -1,4 +1,5 @@
 import pygame
+import random
 
 # Initialize the pygame
 pygame.init()
@@ -12,14 +13,21 @@ icon = pygame.image.load('spaceship.png')
 pygame.display.set_icon(icon)
 
 # PLayer
-playerImg = pygame.image.load('ss1.png')    # spaceship size is 64 x 64 px
+playerImg = pygame.image.load('player.png')    # spaceship size is 64 x 64 px
 playerX = 370
 playerY = 480
 playerX_dx = 0  # d = delta = change of x
                 # the higher dx, the faster spaceship moves
+# Enemy
+enemyImg = pygame.image.load('enemy.png')    # spaceship size is 64 x 64 px
+enemyX = random.randint(0, 800)
+enemyY = random.randint(50, 150)
+enemyX_dx = 0
 
 def player(x, y):
     screen.blit(playerImg, (x, y))  # draw img in coordinate (pX, pY)
+def enemy(x, y):
+    screen.blit(enemyImg, (x, y))
 
 # Game Loop
 running = True
@@ -52,5 +60,6 @@ while running:
         playerX = 0
     else:
         playerX += playerX_dx
+    enemy(enemyX, enemyY)
     player(playerX, playerY)
     
