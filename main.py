@@ -22,7 +22,8 @@ playerX_dx = 0  # d = delta = change of x
 enemyImg = pygame.image.load('enemy.png')    # spaceship size is 64 x 64 px
 enemyX = random.randint(0, 800)
 enemyY = random.randint(50, 150)
-enemyX_dx = 0
+enemyX_dx = 0.15
+enemyY_dy = 35  # moving up/down 35px
 
 def player(x, y):
     screen.blit(playerImg, (x, y))  # draw img in coordinate (pX, pY)
@@ -53,13 +54,20 @@ while running:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_dx = 0
-        
+      
+    # Checking for boundaries of spaceship
+    playerX += playerX_dx  
     if(playerX >= 740):
         playerX = 740
     elif(playerX <= 0):
         playerX = 0
-    else:
-        playerX += playerX_dx
+        
+    # Enemy movement
+    enemyX += enemyX_dx
+    if(enemyX >= 740 or enemyX <= 0):
+        enemyX_dx *= -1
+        enemyY += enemyY_dy
+        
     enemy(enemyX, enemyY)
     player(playerX, playerY)
     
