@@ -15,6 +15,8 @@ pygame.display.set_icon(icon)
 playerImg = pygame.image.load('ss1.png')
 playerX = 370
 playerY = 480
+playerX_dx = 0  # d = delta = change of x
+                # the higher dx, the faster spaceship moves
 
 def player(x, y):
     screen.blit(playerImg, (x, y))  # draw img in coordinate (pX, pY)
@@ -26,10 +28,24 @@ while running:
     
     # background color RGB
     screen.fill((0,0,0))    # screen should be drawn first, below all others
-    playerX += 0.1
+    
+    # X+: moves to right; X-: moves to left
+    # Y+: moves down; Y-: moves up
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
     
+        # if keystroke is pressed, check whether it's right or left
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                playerX_dx = -0.2
+            if event.key == pygame.K_RIGHT:
+                playerX_dx = 0.2
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                playerX_dx = 0
+    
+    playerX += playerX_dx
     player(playerX, playerY)
     
