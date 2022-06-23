@@ -12,6 +12,9 @@ pygame.display.set_caption("Space Invaders")
 icon = pygame.image.load('spaceship.png')
 pygame.display.set_icon(icon)
 
+# Background load image
+background = pygame.image.load('background.png')
+
 # PLayer
 playerImg = pygame.image.load('player.png')    # spaceship size is 64 x 64 px
 playerX = 370
@@ -37,6 +40,9 @@ while running:
     
     # background color RGB
     screen.fill((0,0,0))    # screen should be drawn first, below all others
+    
+    # Background print
+    screen.blit(background, (0, 0))
     
     # X+: moves to right; X-: moves to left
     # Y+: moves down; Y-: moves up
