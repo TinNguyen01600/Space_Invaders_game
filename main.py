@@ -12,7 +12,7 @@ icon = pygame.image.load('spaceship.png')
 pygame.display.set_icon(icon)
 
 # PLayer
-playerImg = pygame.image.load('ss1.png')
+playerImg = pygame.image.load('ss1.png')    # spaceship size is 64 x 64 px
 playerX = 370
 playerY = 480
 playerX_dx = 0  # d = delta = change of x
@@ -45,7 +45,12 @@ while running:
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_dx = 0
-    
-    playerX += playerX_dx
+        
+    if(playerX >= 740):
+        playerX = 740
+    elif(playerX <= 0):
+        playerX = 0
+    else:
+        playerX += playerX_dx
     player(playerX, playerY)
     
