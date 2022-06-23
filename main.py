@@ -16,18 +16,20 @@ playerImg = pygame.image.load('ss1.png')
 playerX = 370
 playerY = 480
 
-def player():
-    screen.blit(playerImg, (playerX, playerY))
+def player(x, y):
+    screen.blit(playerImg, (x, y))  # draw img in coordinate (pX, pY)
 
 # Game Loop
 running = True
 while running:
     pygame.display.update()
+    
     # background color RGB
     screen.fill((0,0,0))    # screen should be drawn first, below all others
+    playerX += 0.1
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
     
-    player()
+    player(playerX, playerY)
     
