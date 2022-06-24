@@ -70,7 +70,9 @@ while running:
             if event.key == pygame.K_RIGHT:
                 playerX_dx = 0.2
             if event.key == pygame.K_SPACE:
-                bullet_state = "fire"
+                if bullet_state == "ready":
+                    bullet_state = "fire"
+                    bulletX = playerX   # Get the current X-coordinate of spaceship
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_dx = 0
@@ -87,11 +89,16 @@ while running:
     if(enemyX >= 740 or enemyX <= 0):
         enemyX_dx *= -1
         enemyY += enemyY_dy
-        
+    
     # Bullet movement
-    if bullet_state == "fire":
-        fire_bullet(playerX, bulletY)
+    if bullet_state == "fire": 
+        fire_bullet(bulletX, bulletY)
         bulletY -= bulletY_dy   # moving upwards
+        
+    # Shooting multiple bullets
+    if bulletY <= 0:
+        bullet_state = "ready"
+        bulletY = playerY    # = 480
         
     enemy(enemyX, enemyY)
     player(playerX, playerY)
