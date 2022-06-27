@@ -59,8 +59,18 @@ def isColission(enemyX, enemyY, bulletX, bulletY):
         return True
     else:
         return False
-score = 0
 
+# Score
+score_value = 0
+font = pygame.font.Font('Water_Galon.ttf', 32)  # Text size = 32
+# Download font from dafont.com
+textX = 10
+textY = 10
+
+def show_score(x, y):
+    score = font.render("SCORE : " + str(score_value), True, (255,255,255)) # Text color white
+    screen.blit(score, (x, y))
+    
 # Game Loop
 running = True
 while running:
@@ -112,8 +122,7 @@ while running:
         if collision:   # set bullet to "ready" state
             bullet_state = "ready"
             bulletY = playerY
-            score+=1
-            print(score)
+            score_value += 1
             enemyX[i] = random.randint(0, 740)
             enemyY[i] = random.randint(50, 150)
         enemy(enemyX[i], enemyY[i], i)
@@ -129,4 +138,4 @@ while running:
         bulletY = playerY    # = 480
 
     player(playerX, playerY)
-    
+    show_score(textX, textY)
