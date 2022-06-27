@@ -71,10 +71,15 @@ font = pygame.font.Font('Water_Galon.ttf', 32)  # Text size = 32
 # Download font from dafont.com
 textX = 10
 textY = 10
-
 def show_score(x, y):
     score = font.render("SCORE : " + str(score_value), True, (255,255,255)) # Text color white
     screen.blit(score, (x, y))
+
+# Game Over
+over_font = pygame.font.Font('Water_Galon.ttf', 64)
+def game_over():
+    over = over_font.render("GAME OVER", True, (255,255,255))
+    screen.blit(over, (200, 250))
     
 # Game Loop
 running = True
@@ -119,6 +124,13 @@ while running:
         
     # Enemy movement
     for i in range(no_of_en):
+        # Game Over
+        if enemyY[i] > 460:
+            for j in range(no_of_en):
+                enemyY[j] = 1000
+            game_over()
+            break
+        
         enemyX[i] += enemyX_dx[i]
         if(enemyX[i] >= 740 or enemyX[i] <= 0):
             enemyX_dx[i] *= -1
